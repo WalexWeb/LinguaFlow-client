@@ -1,5 +1,3 @@
-import type { LanguageWithoutProgress, LanguageWithProgress } from "@/app/types/LanguageCard.type.";
-
 export const languages = [
   { name: "Английский", flag: "🇬🇧" },
   { name: "Испанский", flag: "🇪🇸" },
@@ -13,13 +11,13 @@ export const languages = [
   { name: "Арабский", flag: "🇸🇦" },
 ];
 
-  export const learningLanguages: LanguageWithProgress[] = [
-    { name: "Испанский", flag: "🇪🇸", progress: 45 },
-    { name: "Японский", flag: "🇯🇵", progress: 28 },
-  ];
+export const learningLanguages = [
+  { name: "Испанский", flag: "🇪🇸", progress: 45 },
+  { name: "Японский", flag: "🇯🇵", progress: 28 },
+];
 
- export const newLanguages: LanguageWithoutProgress[] = [
-    { name: "Французский", flag: "🇫🇷" },
-    { name: "Немецкий", flag: "🇩🇪" },
-    { name: "Итальянский", flag: "🇮🇹" },
-  ];
+export const newLanguages = [
+  { name: "Французский", flag: "🇫🇷" },
+  { name: "Немецкий", flag: "🇩🇪" },
+  { name: "Итальянский", flag: "🇮🇹" },
+];
