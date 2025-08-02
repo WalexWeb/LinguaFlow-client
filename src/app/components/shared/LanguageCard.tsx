@@ -15,11 +15,11 @@ const LanguageCard = ({
     className="cursor-pointer overflow-hidden rounded-2xl border-2 border-sky-400/30 bg-gray-700/7 p-6 backdrop-blur-lg hover:border-sky-400/55"
   >
     <div className="z-10 flex items-center gap-4">
-      <div className="text-3xl">{flag}</div>
+      <div className="text-4xl">{flag}</div>
       <div>
-        <h3 className="text-lg font-medium">{name}</h3>
+        <h3 className="text-xl font-medium">{name}</h3>
         {progress !== undefined && (
-          <span className="mt-1 block text-sm text-gray-500">
+          <span className="mt-1 block text-md text-gray-500">
             Прогресс: {progress}%
           </span>
         )}

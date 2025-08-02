@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import StepCard from "../ui/StepCard";
+import Button from "../ui/Button";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
@@ -131,24 +133,8 @@ function HowItWorksModal({ setShowHowItWorks }: HowItWorksModalProps) {
 
         {/* Шаги */}
         <div className="space-y-6">
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 + 0.3 }}
-              className="flex items-start gap-4 rounded-xl p-4 transition-colors hover:bg-slate-800/40"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400/20 to-blue-600/20 text-sky-400">
-                {step.icon}
-              </div>
-              <div>
-                <h4 className="text-xl font-semibold text-white">
-                  {step.title}
-                </h4>
-                <p className="mt-1 text-lg text-gray-400">{step.description}</p>
-              </div>
-            </motion.div>
+          {steps.map((step, i) => (
+            <StepCard step={step} index={i} />
           ))}
         </div>
 
@@ -159,28 +145,7 @@ function HowItWorksModal({ setShowHowItWorks }: HowItWorksModalProps) {
           transition={{ delay: 0.7 }}
           className="mt-10 flex justify-end"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.99 }}
-            onClick={() => setShowHowItWorks(false)}
-            className="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 px-6 py-3 text-lg font-medium text-white"
-          >
-            Начать обучение
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12H19"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M12 5L19 12L12 19"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </motion.button>
+          <Button>Начать обучение</Button>
         </motion.div>
       </motion.div>
     </motion.div>
