@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import type { RefObject } from "react";
 
 interface AnimatedBackgroundProps {
-  targetRef: RefObject<HTMLElement | null>;
+  targetRef?: RefObject<HTMLElement | null>;
 }
 
 export const AnimatedBackground = ({ targetRef }: AnimatedBackgroundProps) => {

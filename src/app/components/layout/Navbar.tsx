@@ -9,13 +9,9 @@ function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-3"
         >
-          <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 text-2xl font-bold text-white"
-            whileHover={{ rotate: 15 }}
-            transition={{ type: "spring" }}
-          >
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 text-2xl font-bold text-white">
             LF
-          </motion.div>
+          </div>
           <h1 className="text-4xl font-semibold">LinguaFlow</h1>
         </motion.div>
 
