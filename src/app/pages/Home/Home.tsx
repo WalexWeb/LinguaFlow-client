@@ -8,6 +8,7 @@ import MethodsSection from "./MethodsSection";
 import FeaturesSection from "./FeaturesSection";
 import CTASection from "./CTASection";
 import Navbar from "@/app/components/layout/Navbar";
+import Footer from "@/app/components/layout/Footer";
 
 const Home = () => {
   const [showHowItWorks, setShowHowItWorks] = useState<boolean>(false);
@@ -36,6 +37,8 @@ const Home = () => {
           )}
         </AnimatePresence>
       </main>
+      
+      <Footer />
     </div>
   );
 };

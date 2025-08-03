@@ -1,6 +1,6 @@
 import MethodCard from "@/app/components/ui/MethodCard";
 import { motion } from "framer-motion";
-import { BookOpen, Clock, Languages, Users } from "lucide-react";
+import { BookOpen, Clock, Languages } from "lucide-react";
 
 function MethodsSection() {
   // Методы обучения
@@ -14,11 +14,6 @@ function MethodsSection() {
       icon: <Clock size={28} />,
       title: "Микро-уроки",
       description: "Короткие интенсивные сессии для максимального погружения",
-    },
-    {
-      icon: <Users size={28} />,
-      title: "Сообщество",
-      description: "Общение с единомышленниками и носителями языка",
     },
     {
       icon: <Languages size={28} />,
@@ -43,7 +38,7 @@ function MethodsSection() {
         </p>
       </motion.div>
 
-      <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {methods.map((method, i) => (
           <MethodCard method={method} index={i} />
         ))}

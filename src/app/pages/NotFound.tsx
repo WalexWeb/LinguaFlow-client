@@ -48,7 +48,7 @@ const NotFound = () => {
           transition={{ delay: 0.3 }}
           className="mb-4 text-4xl font-bold md:text-5xl"
         >
-          Страница уплыла в языковой поток
+          Эта страница растворилась в глубинах контекста
         </motion.h2>
 
         {/* Описание */}
