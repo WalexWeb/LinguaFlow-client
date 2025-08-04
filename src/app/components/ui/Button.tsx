@@ -7,7 +7,12 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button = ({ children, onClick, className = "" }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  className = "",
+  ...props
+}: ButtonProps) => {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -17,6 +22,7 @@ const Button = ({ children, onClick, className = "" }: ButtonProps) => {
         "cursor-pointer rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 px-6 py-3 text-xl font-medium text-white",
         className,
       )}
+      {...props}
     >
       {children}
     </motion.button>

@@ -9,16 +9,18 @@ import FeaturesSection from "./FeaturesSection";
 import CTASection from "./CTASection";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
+import RegistrationModal from "@/app/components/Auth/RegistrationModal";
 
 const Home = () => {
   const [showHowItWorks, setShowHowItWorks] = useState<boolean>(false);
+  const [showRegistration, setShowRegistration] = useState<boolean>(false);
   const mainRef = useRef<HTMLElement>(null);
 
   return (
     <div className="min-h-screen w-screen overflow-x-hidden text-white">
       <AnimatedBackground targetRef={mainRef} />
 
-      <Navbar />
+      <Navbar onOpenRegistration={() => setShowRegistration(true)} />
 
       <main ref={mainRef} className="relative z-10">
         <HeroBanner setShowHowItWorks={setShowHowItWorks} />
@@ -35,9 +37,11 @@ const Home = () => {
           {showHowItWorks && (
             <HowItWorksModal setShowHowItWorks={setShowHowItWorks} />
           )}
+          {showRegistration && (
+            <RegistrationModal onClose={() => setShowRegistration(false)} />
+          )}
         </AnimatePresence>
       </main>
-      
       <Footer />
     </div>
   );

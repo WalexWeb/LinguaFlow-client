@@ -3,7 +3,7 @@ import { Languages, BookOpen, MessageCircle, Settings } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="relative mt-auto bg-gradient-to-b to-blue-950/80">
+    <footer className="relative mt-auto bg-gradient-to-b to-blue-700/25">
       {/* Пузырьки с символами */}
       {[...Array(12)].map((_, i) => {
         const chars = "•◦";
