@@ -4,9 +4,13 @@ import GradientButton from "../ui/GradientButton";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
+  onOpenRegistration?: () => void;
 }
 
-function HowItWorksModal({ setShowHowItWorks }: HowItWorksModalProps) {
+function HowItWorksModal({
+  setShowHowItWorks,
+  onOpenRegistration,
+}: HowItWorksModalProps) {
   const steps = [
     {
       icon: (
@@ -145,7 +149,9 @@ function HowItWorksModal({ setShowHowItWorks }: HowItWorksModalProps) {
           transition={{ delay: 0.7 }}
           className="mt-10 flex justify-center"
         >
-          <GradientButton className="w-70">Начать обучение</GradientButton>
+          <GradientButton className="w-70" onClick={onOpenRegistration}>
+            Начать обучение
+          </GradientButton>
         </motion.div>
       </motion.div>
     </motion.div>

@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 interface NavbarProps {
   onOpenRegistration?: () => void;
+  onOpenLogin?: () => void;
 }
 
-function Navbar({ onOpenRegistration }: NavbarProps) {
+function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore();
 
   return (
@@ -32,7 +33,10 @@ function Navbar({ onOpenRegistration }: NavbarProps) {
         >
           {!isAuthenticated ? (
             <>
-              <button className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:bg-black hover:text-sky-500">
+              <button
+                className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:bg-black hover:text-sky-500"
+                onClick={onOpenLogin}
+              >
                 Вход
               </button>
               <motion.button

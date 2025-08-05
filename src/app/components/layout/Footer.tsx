@@ -36,7 +36,7 @@ const Footer = () => {
       })}
 
       {/* Основное содержимое футера */}
-      <div className="relative z-10 mx-auto w-7xl px-6 py-16 lg:px-8">
+      <div className="relative mx-auto w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Навигация */}
           <motion.div

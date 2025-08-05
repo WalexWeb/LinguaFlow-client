@@ -22,7 +22,7 @@ const NotFound = () => {
               rotate: [0, 5, -5, 0],
               transition: { duration: 2, repeat: Infinity },
             }}
-            className="absolute -top-8 -left-8 text-cyan-400"
+            className="absolute -top-8 -left-8 text-sky-400"
           >
             <Globe size={48} />
           </motion.div>

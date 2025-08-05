@@ -11,6 +11,8 @@ import {
 import { AnimatedBackground } from "../components/backgrounds/AnimatedBackground";
 import { Chart } from "chart.js/auto";
 import Navbar from "../components/layout/Navbar";
+import { useAuthStore } from "../stores/AuthStore";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   // Состояния
@@ -25,6 +27,10 @@ const Profile = () => {
     dailyGoal: 30,
     xp: 2450,
   });
+
+  const { isAuthenticated } = useAuthStore();
+
+  const navigate = useNavigate();
 
   // Моковые данные
   const progressData = {
@@ -213,6 +219,10 @@ const Profile = () => {
       });
     }
   }, [activeTab]);
+
+  if (!isAuthenticated) {
+    navigate("/");
+  }
 
   return (
     <div className="h-screen w-screen p-4 text-white sm:p-8">
