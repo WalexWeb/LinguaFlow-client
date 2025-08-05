@@ -7,7 +7,7 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button = ({
+const GradientButton = ({
   children,
   onClick,
   className = "",
@@ -17,11 +17,11 @@ const Button = ({
     <motion.button
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.99 }}
+      onClick={onClick}
       className={clsx(
-        "flex cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-sky-400/30 px-8 py-4 text-xl font-medium text-sky-400 hover:border-sky-400/50 hover:bg-sky-400/5",
+        "cursor-pointer rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 px-6 py-3 text-xl font-medium text-white",
         className,
       )}
-      onClick={onClick}
       {...props}
     >
       {children}
@@ -29,4 +29,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default GradientButton;

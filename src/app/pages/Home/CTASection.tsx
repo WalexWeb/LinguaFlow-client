@@ -1,4 +1,4 @@
-import Button from "@/app/components/ui/Button";
+import GradientButton from "@/app/components/ui/GradientButton";
 import { motion } from "framer-motion";
 
 function CTASection() {
@@ -15,7 +15,7 @@ function CTASection() {
       <p className="text-opacity-70 mb-8 text-xl text-white">
         Позвольте течению знаний унести вас к новым горизонтам
       </p>
-      <Button className="px-8 py-4">Начать сейчас</Button>
+      <GradientButton className="px-8 py-4">Начать сейчас</GradientButton>
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronRight, Globe } from "lucide-react";
-import Button from "../components/ui/Button";
 import { AnimatedBackground } from "../components/backgrounds/AnimatedBackground";
+import GradientButton from "../components/ui/GradientButton";
 
 const NotFound = () => {
   return (
@@ -69,7 +69,7 @@ const NotFound = () => {
           transition={{ delay: 0.7 }}
           className="flex items-center justify-center gap-2"
         >
-          <Button>
+          <GradientButton>
             <Link to="/" className="flex items-center gap-2">
               Вернуться на главную
               <motion.div
@@ -81,7 +81,7 @@ const NotFound = () => {
                 <ChevronRight />
               </motion.div>
             </Link>
-          </Button>
+          </GradientButton>
         </motion.div>
       </div>
 

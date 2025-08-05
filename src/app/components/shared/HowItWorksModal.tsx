@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import StepCard from "../ui/StepCard";
-import Button from "../ui/Button";
+import GradientButton from "../ui/GradientButton";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
@@ -143,9 +143,9 @@ function HowItWorksModal({ setShowHowItWorks }: HowItWorksModalProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="mt-10 flex justify-end"
+          className="mt-10 flex justify-center"
         >
-          <Button>Начать обучение</Button>
+          <GradientButton className="w-70">Начать обучение</GradientButton>
         </motion.div>
       </motion.div>
     </motion.div>

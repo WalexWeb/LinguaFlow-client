@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { HOME_SLOGANS } from "@/data/home";
 import Button from "@/app/components/ui/Button";
+import GradientButton from "@/app/components/ui/GradientButton";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
@@ -47,15 +48,9 @@ function HeroBanner({ setShowHowItWorks }: HowItWorksModalProps) {
           transition={{ delay: 0.3 }}
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
-          <Button>Начать обучение</Button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.99 }}
-            onClick={() => setShowHowItWorks(true)}
-            className="flex cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-sky-400/30 px-8 py-4 text-xl font-medium text-sky-400 hover:border-sky-400/50 hover:bg-sky-400/5"
-          >
-            <span>Как это работает</span>
+          <GradientButton>Начать обучение</GradientButton>
+          <Button onClick={() => setShowHowItWorks(true)}>
+            Как это работает
             <svg
               width="20"
               height="20"
@@ -78,7 +73,7 @@ function HeroBanner({ setShowHowItWorks }: HowItWorksModalProps) {
                 strokeLinejoin="round"
               />
             </svg>
-          </motion.button>
+          </Button>
         </motion.div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 interface NavbarProps {
-  onOpenRegistration: () => void;
+  onOpenRegistration?: () => void;
 }
 
 function Navbar({ onOpenRegistration }: NavbarProps) {

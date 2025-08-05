@@ -23,16 +23,16 @@ function LanguageSection() {
             </p>
           </div>
 
-          <div className="flex rounded-lg border border-sky-400/50 bg-black p-1 text-xl">
+          <div className="flex rounded-lg border border-sky-400/50 p-1 text-xl">
             <button
               onClick={() => setActiveTab("learning")}
-              className={`cursor-pointer rounded-md px-5 py-2 text-sky-400 transition-colors hover:text-sky-500 ${activeTab === "learning" ? "bg-opacity-10 bg-black" : "text-sky-400/60"}`}
+              className={`cursor-pointer rounded-md px-5 py-2 text-sky-400 transition-colors hover:text-sky-500 ${activeTab === "learning" ? "bg-opacity-10" : "text-sky-400/60"}`}
             >
               В процессе
             </button>
             <button
               onClick={() => setActiveTab("new")}
-              className={`cursor-pointer rounded-md px-5 py-2 text-sky-400 transition-colors hover:text-sky-500 ${activeTab === "new" ? "bg-opacity-10 bg-black" : "text-sky-400/60"}`}
+              className={`cursor-pointer rounded-md px-5 py-2 text-sky-400 transition-colors hover:text-sky-500 ${activeTab === "new" ? "bg-opacity-10" : "text-sky-400/60"}`}
             >
               Не изучено
             </button>
