@@ -1,18 +1,14 @@
+import type { IButton } from "@/app/types/IButton.type";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-}
 
 const Button = ({
   children,
   onClick,
   className = "",
+  disabled,
   ...props
-}: ButtonProps) => {
+}: IButton) => {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}

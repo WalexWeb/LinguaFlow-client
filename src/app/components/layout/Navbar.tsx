@@ -11,7 +11,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore();
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/60 px-6 py-5 backdrop-blur-xl lg:px-12">
+    <nav className="sticky top-0 z-50 bg-black/40 px-6 py-5 backdrop-blur-xl lg:px-12">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <Link to={"/"}>
           <motion.div
@@ -34,7 +34,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
           {!isAuthenticated ? (
             <>
               <button
-                className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:bg-black hover:text-sky-500"
+                className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:text-sky-500"
                 onClick={onOpenLogin}
               >
                 Вход
@@ -51,7 +51,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
           ) : (
             <>
               <button
-                className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:bg-black hover:text-sky-500"
+                className="hover:bg-opacity-5 cursor-pointer rounded-lg px-4 py-2 text-xl transition-colors hover:text-sky-500"
                 onClick={() => setIsAuthenticated(false)}
               >
                 Выход
