@@ -77,9 +77,11 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
           {/* Заголовок */}
           <div className="mb-8 text-center">
             <div className="mb-4 flex justify-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 text-2xl font-bold text-white">
-                LF
-              </div>
+              <img
+                src="/logo.svg"
+                alt="LinguaFlow Logo"
+                className="h-14 w-14 object-contain"
+              />
             </div>
             <h1 className="mb-2 text-3xl font-bold text-white">Войти</h1>
             <p className="text-gray-400">С возвращением!</p>
@@ -166,7 +168,7 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-6 text-center"
+            className="mt-6 text-center text-lg"
           >
             <p className="text-gray-400">
               Нет аккаунта?{" "}

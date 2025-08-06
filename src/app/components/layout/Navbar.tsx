@@ -19,9 +19,11 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 text-2xl font-bold text-white">
-              LF
-            </div>
+            <img
+              src="/logo.svg"
+              alt="LinguaFlow Logo"
+              className="h-full w-full object-contain"
+            />
             <h1 className="text-4xl font-semibold">LinguaFlow</h1>
           </motion.div>
         </Link>

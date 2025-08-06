@@ -101,9 +101,11 @@ const RegistrationModal = ({
           {/* Заголовок */}
           <div className="mb-8 text-center">
             <div className="mb-4 flex justify-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 text-2xl font-bold text-white">
-                LF
-              </div>
+              <img
+                src="/logo.svg"
+                alt="LinguaFlow Logo"
+                className="h-14 w-14 object-contain"
+              />
             </div>
             <h1 className="mb-2 text-4xl font-bold text-white">
               Создайте аккаунт

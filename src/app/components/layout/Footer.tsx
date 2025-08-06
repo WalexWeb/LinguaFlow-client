@@ -172,9 +172,11 @@ const Footer = () => {
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-3"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-blue-500 text-xl font-bold text-white">
-                LF
-              </div>
+              <img
+                src="/logo.svg"
+                alt="LinguaFlow Logo"
+                className="h-10 w-10 object-contain"
+              />
               <h2 className="text-2xl font-semibold">LinguaFlow</h2>
             </motion.div>
 
