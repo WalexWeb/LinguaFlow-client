@@ -1,11 +1,12 @@
 import { m, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import Input from "../ui/Input";
 import { useAuthStore } from "@/app/stores/AuthStore";
+import Input from "../../ui/Input";
 
 interface RegistrationModalProps {
   onClose: () => void;
+  onOpenLogin: () => void;
 }
 
 interface RegistrationFormData {
@@ -15,7 +16,10 @@ interface RegistrationFormData {
   confirmPassword: string;
 }
 
-const RegistrationModal = ({ onClose }: RegistrationModalProps) => {
+const RegistrationModal = ({
+  onClose,
+  onOpenLogin,
+}: RegistrationModalProps) => {
   const {
     register,
     handleSubmit,
@@ -104,7 +108,9 @@ const RegistrationModal = ({ onClose }: RegistrationModalProps) => {
             <h1 className="mb-2 text-4xl font-bold text-white">
               Создайте аккаунт
             </h1>
-            <p className="text-gray-400 text-lg">Начните изучать языки с LinguaFlow</p>
+            <p className="text-lg text-gray-400">
+              Начните изучать языки с LinguaFlow
+            </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -155,7 +161,7 @@ const RegistrationModal = ({ onClose }: RegistrationModalProps) => {
                 >
                   <label
                     htmlFor={name}
-                    className="mb-1 block text-md font-medium text-gray-300"
+                    className="text-md mb-1 block font-medium text-gray-300"
                   >
                     {config.label}
                   </label>
@@ -191,7 +197,7 @@ const RegistrationModal = ({ onClose }: RegistrationModalProps) => {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full rounded-lg bg-gradient-to-r text-xl from-cyan-500 to-blue-600 px-4 py-3 font-medium text-white transition-opacity hover:opacity-90"
+              className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-3 text-xl font-medium text-white transition-opacity hover:opacity-90"
             >
               Зарегистрироваться
             </m.button>
@@ -208,7 +214,11 @@ const RegistrationModal = ({ onClose }: RegistrationModalProps) => {
               <Link
                 to="#"
                 className="font-medium text-sky-500 transition-colors hover:text-sky-400"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                  onOpenLogin();
+                }}
               >
                 Войти
               </Link>

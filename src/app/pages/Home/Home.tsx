@@ -9,8 +9,8 @@ import FeaturesSection from "./FeaturesSection";
 import CTASection from "./CTASection";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
-import RegistrationModal from "@/app/components/Auth/RegistrationModal";
-import LoginModal from "@/app/components/Auth/LoginModal";
+import RegistrationModal from "@/app/components/shared/Auth/RegistrationModal";
+import LoginModal from "@/app/components/shared/Auth/LoginModal";
 
 const Home = () => {
   const [showHowItWorks, setShowHowItWorks] = useState<boolean>(false);
@@ -28,7 +28,10 @@ const Home = () => {
       />
 
       <main ref={mainRef} className="relative z-10">
-        <HeroBanner setShowHowItWorks={setShowHowItWorks} />
+        <HeroBanner
+          setShowHowItWorks={setShowHowItWorks}
+          onOpenRegistration={() => setShowRegistration(true)}
+        />
 
         <LanguageSection />
 
@@ -46,9 +49,17 @@ const Home = () => {
             />
           )}
           {showRegistration && (
-            <RegistrationModal onClose={() => setShowRegistration(false)} />
+            <RegistrationModal
+              onClose={() => setShowRegistration(false)}
+              onOpenLogin={() => setShowLogin(true)}
+            />
           )}
-          {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+          {showLogin && (
+            <LoginModal
+              onClose={() => setShowLogin(false)}
+              onOpenRegistration={() => setShowRegistration(true)}
+            />
+          )}
         </AnimatePresence>
       </main>
       <Footer />

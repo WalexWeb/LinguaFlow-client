@@ -3,13 +3,20 @@ import { motion } from "framer-motion";
 import { HOME_SLOGANS } from "@/data/home";
 import Button from "@/app/components/ui/Button";
 import GradientButton from "@/app/components/ui/GradientButton";
+import { useHandleStart } from "@/hooks/useHandleStart";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
+  onOpenRegistration: () => void;
 }
 
-function HeroBanner({ setShowHowItWorks }: HowItWorksModalProps) {
+function HeroBanner({
+  setShowHowItWorks,
+  onOpenRegistration,
+}: HowItWorksModalProps) {
   const [currentSlogan, setCurrentSlogan] = useState(0);
+
+  const handleStart = useHandleStart();
 
   return (
     <section className="mx-auto px-6 pt-24 pb-32 lg:px-12">
@@ -48,7 +55,9 @@ function HeroBanner({ setShowHowItWorks }: HowItWorksModalProps) {
           transition={{ delay: 0.3 }}
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
-          <GradientButton>Начать обучение</GradientButton>
+          <GradientButton onClick={() => handleStart(onOpenRegistration)}>
+            Начать обучение
+          </GradientButton>
           <Button onClick={() => setShowHowItWorks(true)}>
             Как это работает
             <svg

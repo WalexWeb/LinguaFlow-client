@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import StepCard from "../ui/StepCard";
 import GradientButton from "../ui/GradientButton";
+import { useHandleStart } from "@/hooks/useHandleStart";
 
 interface HowItWorksModalProps {
   setShowHowItWorks: (show: boolean) => void;
@@ -11,6 +12,8 @@ function HowItWorksModal({
   setShowHowItWorks,
   onOpenRegistration,
 }: HowItWorksModalProps) {
+  const handleStart = useHandleStart();
+
   const steps = [
     {
       icon: (
@@ -85,6 +88,11 @@ function HowItWorksModal({
     },
   ];
 
+  const handleClick = () => {
+    setShowHowItWorks(false);
+    handleStart(onOpenRegistration);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -149,7 +157,7 @@ function HowItWorksModal({
           transition={{ delay: 0.7 }}
           className="mt-10 flex justify-center"
         >
-          <GradientButton className="w-70" onClick={onOpenRegistration}>
+          <GradientButton className="w-70" onClick={handleClick}>
             Начать обучение
           </GradientButton>
         </motion.div>
