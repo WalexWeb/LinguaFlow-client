@@ -157,7 +157,7 @@ function HowItWorksModal({
           transition={{ delay: 0.7 }}
           className="mt-10 flex justify-center"
         >
-          <GradientButton className="w-70" onClick={handleClick}>
+          <GradientButton className="w-70 text-xl" onClick={handleClick}>
             Начать обучение
           </GradientButton>
         </motion.div>

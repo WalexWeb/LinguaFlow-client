@@ -7,6 +7,7 @@ const GradientButton = ({
   onClick,
   className = "",
   disabled,
+  type,
   ...props
 }: IButton) => {
   return (
@@ -15,10 +16,10 @@ const GradientButton = ({
       whileTap={{ scale: 0.99 }}
       onClick={onClick}
       className={clsx(
-        "cursor-pointer rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 px-6 py-3 text-xl font-medium text-white",
+        "cursor-pointer rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-medium text-white",
         className,
+        { ...props },
       )}
-      {...props}
     >
       {children}
     </motion.button>

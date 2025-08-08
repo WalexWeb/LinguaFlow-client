@@ -23,7 +23,7 @@ function CTASection({ onOpenRegistration }: CTASectionProps) {
         Позвольте течению знаний унести вас к новым горизонтам
       </p>
       <GradientButton
-        className="px-8 py-4"
+        className="px-8 py-4 text-xl"
         onClick={() => handleStart(onOpenRegistration)}
       >
         Начать сейчас

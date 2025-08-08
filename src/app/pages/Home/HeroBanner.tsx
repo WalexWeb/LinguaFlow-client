@@ -55,7 +55,10 @@ function HeroBanner({
           transition={{ delay: 0.3 }}
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
-          <GradientButton onClick={() => handleStart(onOpenRegistration)}>
+          <GradientButton
+            className="text-xl"
+            onClick={() => handleStart(onOpenRegistration)}
+          >
             Начать обучение
           </GradientButton>
           <Button onClick={() => setShowHowItWorks(true)}>

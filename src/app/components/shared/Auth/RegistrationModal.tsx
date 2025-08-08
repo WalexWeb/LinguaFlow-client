@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@/app/stores/AuthStore";
 import Input from "../../ui/Input";
+import GradientButton from "../../ui/GradientButton";
 
 interface RegistrationModalProps {
   onClose: () => void;
@@ -195,14 +196,12 @@ const RegistrationModal = ({
               ))}
             </AnimatePresence>
 
-            <m.button
+            <GradientButton
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-3 text-xl font-medium text-white transition-opacity hover:opacity-90"
+              className="w-full rounded-lg text-xl font-medium text-white transition-opacity hover:opacity-90"
             >
               Зарегистрироваться
-            </m.button>
+            </GradientButton>
           </form>
 
           <m.div
