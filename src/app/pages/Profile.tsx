@@ -230,7 +230,7 @@ const Profile = () => {
       <AnimatedBackground />
 
       {/* Основной контейнер */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 py-12 sm:gap-6 lg:grid-cols-4 lg:gap-8">
         {/* Левая колонка - профиль */}
         <motion.div
           className="h-fit rounded-2xl border border-gray-700/50 bg-gray-800/50 p-4 backdrop-blur-sm sm:p-6 lg:col-span-1"
