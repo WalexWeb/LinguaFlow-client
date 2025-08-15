@@ -132,91 +132,92 @@ const Profile = () => {
   // Инициализация графика
   useEffect(() => {
     if (activeTab === "progress") {
-      const ctx = document.getElementById("progressChart");
+      const canvas = document.getElementById("progressChart");
+      if (canvas && canvas instanceof HTMLCanvasElement) {
+        // Удаляем предыдущий график, если он существует
+        let chartInstance = Chart.getChart(canvas);
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
 
-      // Удаляем предыдущий график, если он существует
-      let chartInstance = Chart.getChart(ctx);
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
-
-      new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: [
-            "Янв",
-            "Фев",
-            "Мар",
-            "Апр",
-            "Май",
-            "Июн",
-            "Июл",
-            "Авг",
-            "Сен",
-            "Окт",
-            "Ноя",
-            "Дек",
-          ],
-          datasets: [
-            {
-              label: "Активность по месяцам",
-              data: progressData.year,
-              backgroundColor: progressData.year.map((value) =>
-                value > 70 ? "rgba(0, 132, 209, 0.6)" : "rgba(75, 85, 99, 0.7)",
-              ),
-              borderColor: progressData.year.map((value) =>
-                value > 70 ? "rgba(0, 132, 209, 0.9)" : "rgba(75, 85, 99, 1)",
-              ),
-              borderWidth: 1,
-              borderRadius: 4,
-              borderSkipped: false,
+        new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: [
+              "Янв",
+              "Фев",
+              "Мар",
+              "Апр",
+              "Май",
+              "Июн",
+              "Июл",
+              "Авг",
+              "Сен",
+              "Окт",
+              "Ноя",
+              "Дек",
+            ],
+            datasets: [
+              {
+                label: "Активность по месяцам",
+                data: progressData.year,
+                backgroundColor: progressData.year.map((value) =>
+                  value > 70 ? "rgba(0, 132, 209, 0.6)" : "rgba(75, 85, 99, 0.7)",
+                ),
+                borderColor: progressData.year.map((value) =>
+                  value > 70 ? "rgba(0, 132, 209, 0.9)" : "rgba(75, 85, 99, 1)",
+                ),
+                borderWidth: 1,
+                borderRadius: 4,
+                borderSkipped: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                backgroundColor: "rgba(31, 41, 55, 0.9)",
+                titleColor: "#f3f4f6",
+                bodyColor: "#e5e7eb",
+                borderColor: "rgba(75, 85, 99, 0.5)",
+                borderWidth: 1,
+                padding: 12,
+                usePointStyle: true,
+                callbacks: {
+                  label: function (context) {
+                    return `Активность: ${context.raw}%`;
+                  },
+                },
+              },
             },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              backgroundColor: "rgba(31, 41, 55, 0.9)",
-              titleColor: "#f3f4f6",
-              bodyColor: "#e5e7eb",
-              borderColor: "rgba(75, 85, 99, 0.5)",
-              borderWidth: 1,
-              padding: 12,
-              usePointStyle: true,
-              callbacks: {
-                label: function (context) {
-                  return `Активность: ${context.raw}%`;
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                grid: {
+                  color: "rgba(55, 65, 81, 0.5)",
+                },
+                ticks: {
+                  color: "rgba(156, 163, 175)",
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  color: "rgba(156, 163, 175)",
                 },
               },
             },
           },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100,
-              grid: {
-                color: "rgba(55, 65, 81, 0.5)",
-              },
-              ticks: {
-                color: "rgba(156, 163, 175)",
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                color: "rgba(156, 163, 175)",
-              },
-            },
-          },
-        },
-      });
+        });
+      }
     }
   }, [activeTab]);
 
