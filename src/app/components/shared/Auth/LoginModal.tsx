@@ -1,9 +1,11 @@
 import { m, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { useAuthStore } from "@/app/stores/AuthStore";
 import Input from "../../ui/Input";
 import GradientButton from "../../ui/GradientButton";
+import { useState } from "react";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -22,12 +24,36 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const { setIsAuthenticated } = useAuthStore();
+  const { setIsAuthenticated, setToken } = useAuthStore();
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Данные входа:", data);
-    setIsAuthenticated(true);
-    onClose();
+  const onSubmit = async (data: LoginFormData) => {
+    setLoginError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          email: data.email,
+          password: data.password,
+        },
+      );
+
+      if (!response.data.token) {
+        setLoginError("Ошибка сервера: токен не получен");
+        return;
+      }
+
+      setToken(response.data.token);
+      setIsAuthenticated(true);
+      onClose();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setLoginError("Неверный email или пароль");
+      }
+    }
   };
 
   return (
@@ -89,6 +115,20 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Сообщение об ошибке входа */}
+            <AnimatePresence>
+              {loginError && (
+                <m.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden rounded-lg bg-red-900/50 p-3 text-center text-red-300"
+                >
+                  <p>{loginError}</p>
+                </m.div>
+              )}
+            </AnimatePresence>
+
             <AnimatePresence>
               {[
                 {
@@ -158,8 +198,34 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
             <GradientButton
               type="submit"
               className="w-full rounded-lg text-xl font-medium text-white transition-opacity hover:opacity-90"
+              disabled={isSubmitting}
             >
-              Войти
+              {isSubmitting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg
+                    className="h-5 w-5 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  Вход...
+                </span>
+              ) : (
+                "Войти"
+              )}
             </GradientButton>
           </form>
 

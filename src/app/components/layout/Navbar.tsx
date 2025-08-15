@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore();
+  const { isAuthenticated, clearToken } = useAuthStore();
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
 
@@ -61,7 +61,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
             <h1 className="text-2xl font-semibold md:text-3xl">LinguaFlow</h1>
           </motion.div>
         </Link>
-        
+
         {isAuthenticated && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -108,7 +108,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
             <>
               <button
                 className="hover:bg-opacity-5 flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-xl transition-colors hover:text-sky-500"
-                onClick={() => setIsAuthenticated(false)}
+                onClick={() => clearToken()}
               >
                 <LogOut className="h-5 w-5" />
                 Выход

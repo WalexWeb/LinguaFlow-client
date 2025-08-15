@@ -99,4 +99,4 @@
 
 ---
 
-## 🔗 Клиентская часть LinguaFlow: [Перейти к репозиторию](https://github.com/WalexWeb/LinguaFlow)
+## 🔗 Серверная часть LinguaFlow: [Перейти к репозиторию](https://github.com/WalexWeb/LinguaFlow)

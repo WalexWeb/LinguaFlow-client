@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "@/app/stores/AuthStore";
 import Input from "../../ui/Input";
 import GradientButton from "../../ui/GradientButton";
+import axios from "axios";
+import { useState } from "react";
 
 interface RegistrationModalProps {
   onClose: () => void;
@@ -26,9 +28,14 @@ const RegistrationModal = ({
     handleSubmit,
     formState: { errors },
     watch,
+    setError,
   } = useForm<RegistrationFormData>();
 
-  const { setIsAuthenticated } = useAuthStore();
+  const { setIsAuthenticated, setToken } = useAuthStore();
+  const [registrationError, setRegistrationError] = useState<string | null>(
+    null,
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validatePassword = (value: string) => {
     if (value.length < 6) {
@@ -48,10 +55,50 @@ const RegistrationModal = ({
     return value === password || "Пароли не совпадают";
   };
 
-  const onSubmit = (data: RegistrationFormData) => {
-    console.log(data);
-    setIsAuthenticated(true);
-    onClose();
+  const onSubmit = async (data: RegistrationFormData) => {
+    setRegistrationError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        {
+          username: data.name,
+          email: data.email,
+          password: data.password,
+        },
+      );
+
+      if (response.status !== 201) {
+        throw new Error("Ошибка регистрации");
+      }
+
+      // Если регистрация включает автоматический вход
+      if (response.data.token) {
+        setToken(response.data.token);
+        setIsAuthenticated(true);
+      }
+
+      onClose();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // Обработка ошибок валидации с сервера
+          if (error.response.status === 400 && error.response.data.errors) {
+            error.response.data.errors.forEach(
+              (err: { field: string; message: string }) => {
+                setError(err.field as keyof RegistrationFormData, {
+                  type: "server",
+                  message: err.message,
+                });
+              },
+            );
+          } else if (error.response.status === 400) {
+            setRegistrationError("Пользователь с таким email уже существует");
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -66,9 +113,7 @@ const RegistrationModal = ({
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        transition={{
-          duration: 0.3,
-        }}
+        transition={{ duration: 0.3 }}
         className="relative w-full max-w-md"
         onClick={(e) => e.stopPropagation()}
       >
@@ -117,12 +162,32 @@ const RegistrationModal = ({
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Сообщение об ошибке регистрации */}
+            <AnimatePresence>
+              {registrationError && (
+                <m.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden rounded-lg bg-red-900/50 p-3 text-center text-red-300"
+                >
+                  <p>{registrationError}</p>
+                </m.div>
+              )}
+            </AnimatePresence>
+
             <AnimatePresence>
               {Object.entries({
                 name: {
                   label: "Имя",
                   type: "text",
-                  options: { required: "Обязательное поле" },
+                  options: {
+                    required: "Обязательное поле",
+                    minLength: {
+                      value: 2,
+                      message: "Имя должно содержать минимум 2 символа",
+                    },
+                  },
                   placeholder: "Ваше имя",
                 },
                 email: {
@@ -199,8 +264,34 @@ const RegistrationModal = ({
             <GradientButton
               type="submit"
               className="w-full rounded-lg text-xl font-medium text-white transition-opacity hover:opacity-90"
+              disabled={isSubmitting}
             >
-              Зарегистрироваться
+              {isSubmitting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg
+                    className="h-5 w-5 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  Регистрация...
+                </span>
+              ) : (
+                "Зарегистрироваться"
+              )}
             </GradientButton>
           </form>
 
