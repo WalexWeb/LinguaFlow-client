@@ -1,3 +1,4 @@
+import { useOnboardingStore } from "@/app/stores/OnboardingStore";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -7,17 +8,8 @@ import {
   GraduationCap,
   Plane,
 } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
 
-interface GoalSelectorProps {
-  selectedGoals: string[];
-  setSelectedGoals: Dispatch<SetStateAction<string[]>>;
-}
-
-const GoalSelector = ({
-  selectedGoals,
-  setSelectedGoals,
-}: GoalSelectorProps) => {
+const GoalSelector = () => {
   const goals = [
     { icon: <Plane className="h-6 w-6" />, text: "Путешествия" },
     { icon: <Briefcase className="h-6 w-6" />, text: "Карьера" },
@@ -27,10 +19,14 @@ const GoalSelector = ({
     { icon: <Film className="h-6 w-6" />, text: "Популярная культура" },
   ];
 
+  const { selectedGoals, setSelectedGoals } = useOnboardingStore();
+
   const toggleGoal = (goal: string) => {
-    setSelectedGoals((prev) =>
-      prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal],
-    );
+    if (selectedGoals.includes(goal)) {
+      setSelectedGoals(selectedGoals.filter((g: string) => g !== goal));
+    } else {
+      setSelectedGoals([...selectedGoals, goal]);
+    }
   };
 
   return (

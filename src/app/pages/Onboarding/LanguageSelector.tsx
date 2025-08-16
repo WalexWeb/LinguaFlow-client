@@ -1,22 +1,18 @@
+import { useOnboardingStore } from "@/app/stores/OnboardingStore";
 import { languagesSelectorData } from "@/data/onboard";
 import { motion } from "framer-motion";
-import type { Dispatch, SetStateAction } from "react";
 
-interface LanguageSelectorProps {
-  selectedLanguages: string[];
-  // Точный тип функции SetState
-  setSelectedLanguages: Dispatch<SetStateAction<string[]>>;
-}
+const LanguageSelector = () => {
+  const { selectedLanguages, setSelectedLanguages } = useOnboardingStore();
 
-const LanguageSelector = ({
-  selectedLanguages,
-  setSelectedLanguages,
-}: LanguageSelectorProps) => {
   const toggleLanguage = (lang: string) => {
-    setSelectedLanguages((prev) =>
-      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang],
-    );
+    if (selectedLanguages.includes(lang)) {
+      setSelectedLanguages(selectedLanguages.filter((l: string) => l !== lang));
+    } else {
+      setSelectedLanguages([...selectedLanguages, lang]);
+    }
   };
+  
 
   return (
     <div className="space-y-3">

@@ -1,6 +1,6 @@
 import { m, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/app/stores/AuthStore";
 import Input from "../../ui/Input";
 import GradientButton from "../../ui/GradientButton";
@@ -32,6 +32,7 @@ const RegistrationModal = ({
   } = useForm<RegistrationFormData>();
 
   const { setIsAuthenticated, setToken } = useAuthStore();
+  const navigate = useNavigate();
   const [registrationError, setRegistrationError] = useState<string | null>(
     null,
   );
@@ -78,6 +79,8 @@ const RegistrationModal = ({
         setToken(response.data.token);
         setIsAuthenticated(true);
       }
+
+      navigate("/onboarding");
 
       onClose();
     } catch (error) {

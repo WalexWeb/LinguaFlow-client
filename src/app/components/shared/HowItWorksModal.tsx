@@ -88,11 +88,6 @@ function HowItWorksModal({
     },
   ];
 
-  const handleClick = () => {
-    setShowHowItWorks(false);
-    handleStart(onOpenRegistration);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -157,7 +152,10 @@ function HowItWorksModal({
           transition={{ delay: 0.7 }}
           className="mt-10 flex justify-center"
         >
-          <GradientButton className="w-70 text-xl" onClick={handleClick}>
+          <GradientButton
+            className="w-70 text-xl"
+            onClick={() => handleStart(onOpenRegistration)}
+          >
             Начать обучение
           </GradientButton>
         </motion.div>

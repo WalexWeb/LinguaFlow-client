@@ -1,18 +1,17 @@
+import { useOnboardingStore } from "@/app/stores/OnboardingStore";
 import { motion } from "framer-motion";
 
-interface IntensitySliderProps {
-  intensity: number;
-  setIntensity: (intensity: number) => void;
-}
+const IntensitySlider = () => {
+  const { selectedDailyMinutes, setSelectedDailyMinutes } =
+    useOnboardingStore();
 
-const IntensitySlider = ({ intensity, setIntensity }: IntensitySliderProps) => {
   return (
     <div className="px-4">
       <div className="relative mb-8 h-2 rounded-full bg-gray-700">
         <motion.div
           className="absolute h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
           initial={{ width: "0%" }}
-          animate={{ width: `${(intensity / 30) * 100}%` }}
+          animate={{ width: `${(selectedDailyMinutes / 30) * 100}%` }}
           transition={{ duration: 0.5 }}
         />
       </div>
@@ -21,8 +20,8 @@ const IntensitySlider = ({ intensity, setIntensity }: IntensitySliderProps) => {
         type="range"
         min="5"
         max="30"
-        value={intensity}
-        onChange={(e) => setIntensity(parseInt(e.target.value))}
+        value={selectedDailyMinutes}
+        onChange={(e) => setSelectedDailyMinutes(parseInt(e.target.value))}
         className="mb-4 w-full accent-cyan-500"
         whileFocus={{ scale: 1.02 }}
       />
@@ -30,16 +29,16 @@ const IntensitySlider = ({ intensity, setIntensity }: IntensitySliderProps) => {
       <div className="flex justify-between text-gray-400">
         <motion.span
           animate={{
-            color: intensity === 5 ? "#06b6d4" : "#9ca3af",
-            scale: intensity === 5 ? 1.1 : 1,
+            color: selectedDailyMinutes === 5 ? "#06b6d4" : "#9ca3af",
+            scale: selectedDailyMinutes === 5 ? 1.1 : 1,
           }}
         >
           5 мин
         </motion.span>
         <motion.span
           animate={{
-            color: intensity === 30 ? "#06b6d4" : "#9ca3af",
-            scale: intensity === 30 ? 1.1 : 1,
+            color: selectedDailyMinutes === 30 ? "#06b6d4" : "#9ca3af",
+            scale: selectedDailyMinutes === 30 ? 1.1 : 1,
           }}
         >
           30 мин
@@ -53,7 +52,7 @@ const IntensitySlider = ({ intensity, setIntensity }: IntensitySliderProps) => {
           transition: { repeat: Infinity, duration: 2 },
         }}
       >
-        Выбрано: {intensity} минут в день
+        Выбрано: {selectedDailyMinutes} минут в день
       </motion.div>
     </div>
   );

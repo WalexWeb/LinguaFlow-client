@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Target,
@@ -16,6 +16,9 @@ import LanguageSelector from "./LanguageSelector";
 import IntensitySlider from "./IntensitySlider";
 import GradientButton from "@/app/components/ui/GradientButton";
 import ProgressBar from "@/app/components/ui/ProgressBar";
+import { useOnboardingStore } from "@/app/stores/OnboardingStore";
+import { api } from "@/api/api";
+import { useAuthStore } from "@/app/stores/AuthStore";
 
 export interface OnboardingData {
   goals: string[];
@@ -43,9 +46,9 @@ const stepConfig = [
 
 const Onboarding = () => {
   const [step, setStep] = useState(0);
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-  const [intensity, setIntensity] = useState(15);
+  const { selectedGoals, selectedLanguages, selectedDailyMinutes, reset } =
+    useOnboardingStore();
+  const { isOnboardingCompleted, setIsOnboardingCompleted } = useAuthStore();
   const navigate = useNavigate();
 
   const totalSteps = stepConfig.length;
@@ -53,21 +56,36 @@ const Onboarding = () => {
   // Проверка валидности для последнего шага
   const isFormValid = selectedGoals.length > 0 && selectedLanguages.length > 0;
 
+  useEffect(() => {
+    if (isOnboardingCompleted) {
+      navigate("/dashboard");
+    }
+  }, [isOnboardingCompleted, navigate]);
+
   // Сбор и отправка данных
-  const saveOnboardingData = () => {
+  const saveOnboardingData = async () => {
     if (!isFormValid) {
       alert("Пожалуйста, выберите цели и языки.");
       return;
     }
 
-    const data: OnboardingData = {
-      goals: selectedGoals,
-      languages: selectedLanguages,
-      dailyMinutes: intensity,
-    };
+    try {
+      const response = await api.put("/user/onboarding", {
+        goals: selectedGoals,
+        languages: selectedLanguages,
+        dailyMinutes: selectedDailyMinutes,
+      });
 
-    console.log("Данные онбординга:", data);
-    navigate("/dashboard");
+      if (response.status !== 200) {
+        throw new Error("Ошибка при сохранении данных");
+      }
+
+      setIsOnboardingCompleted(true);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Ошибка при отправке данных:", error);
+      reset();
+    }
   };
 
   const steps = [
@@ -89,23 +107,11 @@ const Onboarding = () => {
   const renderComponent = () => {
     switch (step) {
       case 0:
-        return (
-          <GoalSelector
-            selectedGoals={selectedGoals}
-            setSelectedGoals={setSelectedGoals}
-          />
-        );
+        return <GoalSelector />;
       case 1:
-        return (
-          <LanguageSelector
-            selectedLanguages={selectedLanguages}
-            setSelectedLanguages={setSelectedLanguages}
-          />
-        );
+        return <LanguageSelector />;
       case 2:
-        return (
-          <IntensitySlider intensity={intensity} setIntensity={setIntensity} />
-        );
+        return <IntensitySlider />;
       default:
         return null;
     }

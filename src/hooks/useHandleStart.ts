@@ -10,7 +10,7 @@ export function useHandleStart() {
     if (!isAuthenticated && onOpenRegistration) {
       onOpenRegistration();
     } else {
-      navigate("/onboard");
+      navigate("/onboarding");
     }
   };
 }
