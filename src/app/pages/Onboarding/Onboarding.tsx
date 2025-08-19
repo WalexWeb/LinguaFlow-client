@@ -58,7 +58,7 @@ const Onboarding = () => {
 
   useEffect(() => {
     if (isOnboardingCompleted) {
-      navigate("/dashboard");
+      navigate("/learning");
     }
   }, [isOnboardingCompleted, navigate]);
 
@@ -81,7 +81,7 @@ const Onboarding = () => {
       }
 
       setIsOnboardingCompleted(true);
-      navigate("/dashboard");
+      navigate("/learning");
     } catch (error) {
       console.error("Ошибка при отправке данных:", error);
       reset();

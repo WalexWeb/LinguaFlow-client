@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
-  const { isAuthenticated, clearToken } = useAuthStore();
+  const { isAuthenticated, reset } = useAuthStore();
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
 
@@ -28,7 +28,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
     { name: "Главная", path: "/", icon: <Home className="h-5 w-5" /> },
     {
       name: "Обучение",
-      path: "/learn",
+      path: "/learning",
       icon: <BookOpen className="h-5 w-5" />,
     },
     { name: "Игры", path: "/games", icon: <Gamepad className="h-5 w-5" /> },
@@ -44,9 +44,9 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
       initial={{ y: 0 }}
       animate={{ y: hidden ? -100 : 0 }}
       transition={{ type: "spring", damping: 20, stiffness: 300 }}
-      className="fixed top-0 z-50 w-full bg-black/40 backdrop-blur-xl"
+      className="fixed top-0 z-50 w-screen bg-black/40 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 text-white lg:px-12">
+      <div className="mx-auto flex items-center justify-between px-6 py-4 text-white lg:px-12">
         <Link to="/">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -108,7 +108,7 @@ function Navbar({ onOpenRegistration, onOpenLogin }: NavbarProps) {
             <>
               <button
                 className="hover:bg-opacity-5 flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-xl transition-colors hover:text-sky-500"
-                onClick={() => clearToken()}
+                onClick={() => reset()}
               >
                 <LogOut className="h-5 w-5" />
                 Выход

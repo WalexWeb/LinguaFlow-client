@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Headphones, BookOpen, Pencil, Puzzle, Trophy } from "lucide-react";
-import GameCard from "../components/shared/GameCard";
-import { AnimatedBackground } from "../components/backgrounds/AnimatedBackground";
-import Navbar from "../components/layout/Navbar";
-import type { IGameCard } from "../types/IGameCard.type";
+import GameCard from "../../components/shared/GameCard";
+import { AnimatedBackground } from "../../components/backgrounds/AnimatedBackground";
+import Navbar from "../../components/layout/Navbar";
+import type { IGameCard } from "../../types/IGameCard.type";
 import clsx from "clsx";
 
 export default function Games() {
@@ -23,6 +23,7 @@ export default function Games() {
       playsCount: 1245,
       rewards: { xp: 50, coins: 10 },
       isCompleted: true,
+      link: "/"
     },
     {
       id: "2",
@@ -38,6 +39,7 @@ export default function Games() {
       playsCount: 876,
       rewards: { xp: 75, coins: 15 },
       isCompleted: false,
+      link: '/'
     },
     {
       id: "3",
@@ -52,6 +54,21 @@ export default function Games() {
       rating: 4.9,
       playsCount: 532,
       rewards: { xp: 100, coins: 25 },
+      link: '/'
+    },
+    {
+      id: "4",
+      title: "Собери слово",
+      description: "Составьте слово из перемешанных букв за ограниченное время",
+      icon: <Puzzle className="h-6 w-6" />,
+      category: "words",
+      difficulty: "medium",
+      isLocked: false,
+      requiredLevel: 2,
+      rating: 4.7,
+      playsCount: 892,
+      rewards: { xp: 60, coins: 12 },
+      link: '/word-scramble', 
     },
   ];
 
@@ -118,7 +135,7 @@ export default function Games() {
           transition={{ delay: 0.3 }}
           className="mb-8 flex justify-center"
         >
-          <div className="inline-flex rounded-xl border border-sky-400/50 text-lg bg-gray-800/40 p-1 shadow-inner">
+          <div className="inline-flex rounded-xl border border-sky-400/50 bg-gray-800/40 p-1 text-lg shadow-inner">
             {Object.entries(categoryNames).map(([key, { name, icon }]) => (
               <button
                 key={key}

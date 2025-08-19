@@ -11,4 +11,5 @@ export interface IGameCard {
   playsCount: number;
   rewards: { xp: number; coins: number };
   isCompleted?: boolean;
+  link: string;
 }

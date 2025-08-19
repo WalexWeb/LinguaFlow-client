@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import { CheckCircle, Clock, Lock, Star, Volume2 } from "lucide-react";
 import GradientButton from "../ui/GradientButton";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 function GameCard({ game, index }: { game: IGameCard; index: number }) {
+  const navigate = useNavigate();
+
   const difficultyIcons = {
     easy: <CheckCircle className="h-4 w-4 text-emerald-400" />,
     medium: <Clock className="h-4 w-4 text-amber-400" />,
@@ -100,6 +103,7 @@ function GameCard({ game, index }: { game: IGameCard; index: number }) {
 
           <GradientButton
             disabled={game.isLocked}
+            onClick={() => navigate(`/games${game.link}`)}
             className={clsx(
               "text-md flex h-10 items-center gap-2 rounded-lg px-4 py-2",
               game.isLocked

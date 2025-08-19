@@ -24,7 +24,8 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const { setIsAuthenticated, setToken } = useAuthStore();
+  const { setIsAuthenticated, setToken, setIsOnboardingCompleted } =
+    useAuthStore();
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -46,6 +47,7 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
         return;
       }
 
+      setIsOnboardingCompleted(response.data.user.isOnboarded);
       setToken(response.data.token);
       setIsAuthenticated(true);
       onClose();

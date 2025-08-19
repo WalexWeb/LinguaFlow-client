@@ -9,6 +9,7 @@ interface IAuthStore {
   setIsOnboardingCompleted: (isOnboardingCompleted: boolean) => void;
   setToken: (token: string) => void;
   clearToken: () => void;
+  reset: () => void;
 }
 
 export const useAuthStore = create<IAuthStore>()(
@@ -24,6 +25,12 @@ export const useAuthStore = create<IAuthStore>()(
       clearToken: () => {
         set({ token: null, isAuthenticated: false });
       },
+      reset: () =>
+        set({
+          token: null,
+          isAuthenticated: false,
+          isOnboardingCompleted: false,
+        }),
     }),
     {
       name: "auth-storage",
