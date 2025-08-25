@@ -24,7 +24,7 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const { setIsAuthenticated, setToken, setIsOnboardingCompleted } =
+  const { setIsAuthenticated, setIsOnboardingCompleted } =
     useAuthStore();
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,15 +40,12 @@ const LoginModal = ({ onClose, onOpenRegistration }: LoginModalProps) => {
           email: data.email,
           password: data.password,
         },
+        {
+          withCredentials: true,
+        },
       );
 
-      if (!response.data.token) {
-        setLoginError("Ошибка сервера: токен не получен");
-        return;
-      }
-
       setIsOnboardingCompleted(response.data.user.isOnboarded);
-      setToken(response.data.token);
       setIsAuthenticated(true);
       onClose();
     } catch (error) {

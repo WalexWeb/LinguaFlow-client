@@ -31,7 +31,7 @@ const RegistrationModal = ({
     setError,
   } = useForm<RegistrationFormData>();
 
-  const { setIsAuthenticated, setToken } = useAuthStore();
+  const { setIsAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const [registrationError, setRegistrationError] = useState<string | null>(
     null,
@@ -68,15 +68,14 @@ const RegistrationModal = ({
           email: data.email,
           password: data.password,
         },
+        {
+          withCredentials: true,
+        },
       );
 
       if (response.status !== 201) {
         throw new Error("Ошибка регистрации");
-      }
-
-      // Если регистрация включает автоматический вход
-      if (response.data.token) {
-        setToken(response.data.token);
+      } else {
         setIsAuthenticated(true);
       }
 
