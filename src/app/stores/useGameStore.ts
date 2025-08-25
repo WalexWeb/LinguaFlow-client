@@ -14,7 +14,8 @@ interface GameState {
   setCurrentWord: (word: string) => void;
   setScrambledLetters: (letters: string[]) => void;
   setSelectedLetters: (letters: string[]) => void;
-  reset: () => void;
+  resetRound: () => void;
+  resetGame: () => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -33,12 +34,21 @@ export const useGameStore = create<GameState>((set) => ({
   setScrambledLetters: (letters) => set({ scrambledLetters: letters }),
   setSelectedLetters: (letters) => set({ selectedLetters: letters }),
 
-  reset: () =>
+  resetRound: () =>
     set({
-      score: 0,
-      timeLeft: 1060,
       currentWord: "",
       scrambledLetters: [],
       selectedLetters: [],
+      isCorrect: null,
+    }),
+
+  resetGame: () =>
+    set({
+      score: 0,
+      timeLeft: 60,
+      currentWord: "",
+      scrambledLetters: [],
+      selectedLetters: [],
+      isCorrect: null,
     }),
 }));

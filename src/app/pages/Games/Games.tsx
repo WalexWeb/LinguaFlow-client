@@ -11,9 +11,9 @@ export default function Games() {
   const gamesData: IGameCard[] = [
     {
       id: "1",
-      title: "Словестная дуэль",
+      title: "Скоростной раунд",
       description:
-        "Угадайте как можно больше слов за 60 секунд. Соревнуйтесь с другими игроками!",
+        "Переведите как можно больше слов за 10 секунд",
       icon: <BookOpen className="h-6 w-6" />,
       category: "words",
       difficulty: "easy",
@@ -22,8 +22,8 @@ export default function Games() {
       rating: 4.8,
       playsCount: 1245,
       rewards: { xp: 50, coins: 10 },
-      isCompleted: true,
-      link: "/"
+      isCompleted: false,
+      link: "/speed-round",
     },
     {
       id: "2",
@@ -39,7 +39,7 @@ export default function Games() {
       playsCount: 876,
       rewards: { xp: 75, coins: 15 },
       isCompleted: false,
-      link: '/'
+      link: "/",
     },
     {
       id: "3",
@@ -54,7 +54,7 @@ export default function Games() {
       rating: 4.9,
       playsCount: 532,
       rewards: { xp: 100, coins: 25 },
-      link: '/'
+      link: "/",
     },
     {
       id: "4",
@@ -68,7 +68,7 @@ export default function Games() {
       rating: 4.7,
       playsCount: 892,
       rewards: { xp: 60, coins: 12 },
-      link: '/word-scramble', 
+      link: "/word-scramble",
     },
   ];
 
