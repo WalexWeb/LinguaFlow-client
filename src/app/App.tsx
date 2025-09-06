@@ -6,6 +6,7 @@ import Onboarding from "./pages/Onboarding/Onboarding";
 import Games from "./pages/Games/Games";
 import WordScrambleGame from "./pages/Games/WorldScramble/WordScrambleGame";
 import SpeedRound from "./pages/Games/SpeedRound/SpeedRound";
+import Learning from "./pages/Learning";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/learning" element={<Learning />} />
         <Route path="/games" element={<Games />} />
         <Route path="/games/word-scramble" element={<WordScrambleGame />} />
         <Route path="/games/speed-round" element={<SpeedRound />} />
