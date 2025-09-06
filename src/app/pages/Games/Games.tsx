@@ -38,7 +38,7 @@ export default function Games() {
       rating: 4.5,
       playsCount: 876,
       rewards: { xp: 75, coins: 15 },
-      isCompleted: false,
+      isCompleted: true,
       link: "/",
     },
     {

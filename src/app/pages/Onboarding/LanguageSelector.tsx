@@ -1,5 +1,5 @@
 import { useOnboardingStore } from "@/app/stores/OnboardingStore";
-import { languagesSelectorData } from "@/data/onboard";
+import { languagesSelectorData } from "@/data/langs";
 import { motion } from "framer-motion";
 
 const LanguageSelector = () => {
@@ -12,7 +12,6 @@ const LanguageSelector = () => {
       setSelectedLanguages([...selectedLanguages, lang]);
     }
   };
-  
 
   return (
     <div className="space-y-3">
